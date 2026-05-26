@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liderando las Nuevas Generaciones</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #FFD600;
+    --red: #FF2D55;
+    --blue: #00B4FF;
+    --green: #00C853;
+    --dark: #0A0A0F;
+    --dark2: #13131C;
+    --card-bg: #1A1A28;
+    --text: #FFFFFF;
+    --muted: rgba(255,255,255,0.6);
+    --border: rgba(255,255,255,0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--dark);
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,180,255,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(255,45,85,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 20% 70%, rgba(255,214,0,0.08) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    max-width: 900px;
+  }
+
+  .logo-wrap {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .logo-wrap img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(0,180,255,0.3);
+  }
+
+  .hero-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+  }
+
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--blue);
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title .line1 { color: var(--text); }
+  .hero-title .line2 {
+    background: linear-gradient(90deg, var(--yellow), var(--red), var(--blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-title .line3 { color: var(--text); }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    font-weight: 400;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .tag {
+    padding: 0.5rem 1.25rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .tag-date { background: rgba(255,214,0,0.15); color: var(--yellow); border: 1px solid rgba(255,214,0,0.3); }
+  .tag-place { background: rgba(0,180,255,0.12); color: var(--blue); border: 1px solid rgba(0,180,255,0.25); }
+  .tag-price { background: rgba(0,200,83,0.12); color: var(--green); border: 1px solid rgba(0,200,83,0.25); }
+
+  .cta-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--yellow), var(--red));
+    color: var(--dark);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 1.1rem 3rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 30px rgba(255,45,85,0.4);
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 40px rgba(255,45,85,0.5);
+  }
+
+  /* ── SCROLL INDICATOR ── */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+
+  .scroll-hint::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--muted), transparent);
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 1.5rem; }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background: var(--blue);
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* ── WORKSHOPS ── */
+  .workshops-section { background: var(--dark2); }
+
+  .workshops-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .workshop-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .workshop-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  .workshop-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+
+  .workshop-card:nth-child(1)::before { background: linear-gradient(90deg, var(--yellow), var(--green)); }
+  .workshop-card:nth-child(2)::before { background: linear-gradient(90deg, var(--red), var(--blue)); }
+
+  .workshop-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    line-height: 1;
+    color: rgba(255,255,255,0.06);
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+  }
+
+  .workshop-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .icon-1 { background: rgba(255,214,0,0.15); }
+  .icon-2 { background: rgba(255,45,85,0.15); }
+
+  .workshop-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+
+  .workshop-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── SPEAKER ── */
+  .speaker-section { background: var(--dark); }
+
+  .speaker-inner {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 700px) {
+    .speaker-inner { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+  }
+
+  .speaker-img-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .speaker-img-ring {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    padding: 4px;
+    background: linear-gradient(135deg, var(--yellow), var(--red), var(--blue));
+    flex-shrink: 0;
+  }
+
+  .speaker-img-ring img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top center;
+    border: 4px solid var(--dark);
+  }
+
+  .speaker-badge {
+    position: absolute;
+    bottom: 10px;
+    right: -10px;
+    background: var(--yellow);
+    color: var(--dark);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.4rem 0.9rem;
+    border-radius: 100px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .speaker-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    line-height: 0.95;
+    margin-bottom: 0.5rem;
+  }
+
+  .speaker-role {
+    font-size: 0.9rem;
+    color: var(--blue);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .speaker-org {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .speaker-social {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .speaker-social span { color: var(--text); font-weight: 600; }
+
+  /* ── GIFT ── */
+  .gift-section {
+    background: var(--dark2);
+  }
+
+  .gift-card {
+    margin-top: 3rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gift-card::after {
+    content: '🎁';
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 8rem;
+    opacity: 0.07;
+    pointer-events: none;
+  }
+
+  @media (max-width: 600px) {
+    .gift-card { grid-template-columns: 1fr; }
+    .gift-card::after { display: none; }
+  }
+
+  .gift-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255,214,0,0.15);
+    color: var(--yellow);
+    border: 1px solid rgba(255,214,0,0.3);
+    border-radius: 100px;
+    padding: 0.35rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .gift-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+
+  .gift-title em { color: var(--yellow); font-style: normal; }
+
+  .gift-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .gift-book {
+    width: 140px;
+    height: 190px;
+    background: linear-gradient(135deg, #1e3a5f, #0a1628);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    box-shadow: -6px 6px 20px rgba(0,0,0,0.5), 4px 0 0 rgba(255,255,255,0.05) inset;
+    border-left: 6px solid var(--blue);
+    flex-shrink: 0;
+  }
+
+  .gift-book .author {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .gift-book .btitle {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    color: var(--yellow);
+    line-height: 1.2;
+  }
+
+  .gift-book .pdf-tag {
+    margin-top: 0.75rem;
+    background: rgba(0,180,255,0.2);
+    color: var(--blue);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  /* ── GALLERY ── */
+  .gallery-section { background: var(--dark); padding-top: 3rem; padding-bottom: 3rem; }
+
+  .gallery-strip {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding: 1rem 0;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    margin-top: 2rem;
+  }
+
+  .gallery-strip::-webkit-scrollbar { display: none; }
+
+  .gallery-strip img {
+    height: 220px;
+    width: auto;
+    border-radius: 16px;
+    object-fit: cover;
+    flex-shrink: 0;
+    filter: brightness(0.85) saturate(1.1);
+    transition: filter 0.3s, transform 0.3s;
+  }
+
+  .gallery-strip img:hover {
+    filter: brightness(1) saturate(1.2);
+    transform: scale(1.03);
+  }
+
+  /* ── FORM ── */
+  .form-section { background: var(--dark2); }
+
+  .form-wrap {
+    max-width: 680px;
+    margin: 3rem auto 0;
+  }
+
+  .form-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 2.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.9rem 1.1rem;
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--blue);
+    background: rgba(0,180,255,0.05);
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: rgba(255,255,255,0.25);
+  }
+
+  .form-group textarea {
+    height: 110px;
+    resize: vertical;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+
+  .submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--yellow), var(--red));
+    color: var(--dark);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 1.1rem;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 25px rgba(255,45,85,0.3);
+    margin-top: 0.5rem;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 35px rgba(255,45,85,0.45);
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* success */
+  .success-box {
+    display: none;
+    background: rgba(0,200,83,0.1);
+    border: 1px solid rgba(0,200,83,0.3);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .success-box .check { font-size: 3rem; margin-bottom: 1rem; }
+  .success-box h3 { font-family: 'Bebas Neue'; font-size: 2rem; color: var(--green); margin-bottom: 0.5rem; }
+  .success-box p { color: var(--muted); font-size: 0.9rem; }
+
+  .error-box {
+    display: none;
+    background: rgba(255,45,85,0.1);
+    border: 1px solid rgba(255,45,85,0.3);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    color: #ff6b8a;
+    font-size: 0.85rem;
+    margin-top: 0.75rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+  }
+
+  .footer-logo img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+
+  .footer-text {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .footer-text strong { color: var(--text); }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── COUNTER ── */
+  .countdown-wrap {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    justify-content: center;
+  }
+
+  .cd-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    text-align: center;
+    min-width: 80px;
+  }
+
+  .cd-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--yellow);
+  }
+
+  .cd-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.25rem;
+  }
+
+  /* nav */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: rgba(10,10,15,0.7);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  nav img { width: 38px; height: 38px; object-fit: contain; border-radius: 8px; }
+
+  /* ── HORARIOS ── */
+  .schedule-section { background: var(--dark); }
+
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .schedule-day {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .schedule-day:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  .schedule-day-header {
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .schedule-day:nth-child(1) .schedule-day-header { background: linear-gradient(135deg, rgba(0,180,255,0.15), rgba(0,180,255,0.05)); }
+  .schedule-day:nth-child(2) .schedule-day-header { background: linear-gradient(135deg, rgba(255,214,0,0.15), rgba(255,214,0,0.05)); }
+
+  .schedule-day-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1;
+    letter-spacing: 0.03em;
+  }
+
+  .schedule-day:nth-child(1) .schedule-day-name { color: var(--blue); }
+  .schedule-day:nth-child(2) .schedule-day-name { color: var(--yellow); }
+
+  .schedule-day-date {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  .schedule-time-badge {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    line-height: 1;
+  }
+
+  .schedule-day:nth-child(1) .schedule-time-badge { color: var(--blue); }
+  .schedule-day:nth-child(2) .schedule-time-badge { color: var(--yellow); }
+
+  .schedule-body { padding: 1.75rem 2rem; }
+
+  .schedule-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .schedule-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .schedule-item:first-child { padding-top: 0; }
+
+  .schedule-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .schedule-day:nth-child(1) .schedule-dot { background: rgba(0,180,255,0.15); }
+  .schedule-day:nth-child(2) .schedule-dot { background: rgba(255,214,0,0.15); }
+
+  .schedule-item-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+
+  .schedule-item-desc {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .schedule-footer {
+    padding: 1rem 2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .schedule-location-icon { font-size: 1rem; }
+
+  .schedule-location-text {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .schedule-location-text strong { color: var(--text); display: block; }
+
+  .nav-cta {
+    background: var(--yellow);
+    color: var(--dark);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.25rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .nav-cta:hover { opacity: 0.85; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <img src="images/logo.jpg" alt="Logo">
+  <a href="#registro" class="nav-cta">Registrarme</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="logo-wrap">
+      <img src="images/logo.jpg" alt="Logo Apoyo Juvenil">
+    </div>
+    <div class="hero-eyebrow">Pastoral Juvenil · Apoyo Juvenil LATAM</div>
+    <h1 class="hero-title">
+      <span class="line1">Liderando</span><br>
+      <span class="line2">Las Nuevas</span><br>
+      <span class="line3">Generaciones</span>
+    </h1>
+    <p class="hero-sub">Talleres intensivos para líderes juveniles de todas las iglesias</p>
+    <div class="hero-tags">
+      <span class="tag tag-date">📅 19 y 20 de Junio 2025</span>
+      <span class="tag tag-place">📍 Iglesia WAIO · Chilca, Perú</span>
+      <span class="tag tag-price">✨ Solo S/ 10.00</span>
+    </div>
+    <a href="#registro" class="cta-btn">¡Inscríbete Ahora!</a>
+
+    <div class="countdown-wrap" id="countdown">
+      <div class="cd-box"><div class="cd-num" id="cd-d">00</div><div class="cd-label">Días</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-h">00</div><div class="cd-label">Horas</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-m">00</div><div class="cd-label">Min</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-s">00</div><div class="cd-label">Seg</div></div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- WORKSHOPS -->
+<section class="workshops-section">
+  <div class="container">
+    <div class="section-label">Lo que aprenderás</div>
+    <h2 class="section-title">Los Talleres</h2>
+    <p style="color:var(--muted); font-size:0.95rem; max-width:520px; line-height:1.7;">Dos talleres diseñados para equiparte y transformar tu ministerio juvenil con herramientas reales.</p>
+
+    <div class="workshops-grid fade-up">
+      <div class="workshop-card">
+        <div class="workshop-num">01</div>
+        <div class="workshop-icon icon-1">🎯</div>
+        <h3 class="workshop-title">Herramientas para Alcanzar Esta Generación</h3>
+        <p class="workshop-desc">Descubre estrategias prácticas y efectivas para conectar con la generación actual, entender su lenguaje y llevarles un mensaje que transforme sus vidas.</p>
+      </div>
+      <div class="workshop-card">
+        <div class="workshop-num">02</div>
+        <div class="workshop-icon icon-2">🎨</div>
+        <h3 class="workshop-title">Programas Creativos</h3>
+        <p class="workshop-desc">Aprende a diseñar programas juveniles creativos, dinámicos e impactantes que generen experiencias inolvidables y mantengan a los jóvenes comprometidos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HORARIOS -->
+<section class="schedule-section">
+  <div class="container">
+    <div class="section-label">Planifica tu Asistencia</div>
+    <h2 class="section-title">Horarios del Evento</h2>
+    <p style="color:var(--muted); font-size:0.95rem; max-width:520px; line-height:1.7;">Dos sesiones intensivas para que te lleves herramientas reales. ¡No faltes a ninguna!</p>
+
+    <div class="schedule-grid fade-up">
+
+      <!-- DÍA 1 -->
+      <div class="schedule-day">
+        <div class="schedule-day-header">
+          <div>
+            <div class="schedule-day-name">Viernes 19</div>
+            <div class="schedule-day-date">Junio 2025 · Sesión Nocturna</div>
+          </div>
+          <div class="schedule-time-badge">7 PM</div>
+        </div>
+        <div class="schedule-body">
+          <div class="schedule-item">
+            <div class="schedule-dot">🎤</div>
+            <div>
+              <div class="schedule-item-title">Apertura y Bienvenida</div>
+              <div class="schedule-item-desc">Recepción de participantes, dinámica de integración y presentación del evento.</div>
+            </div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-dot">🎯</div>
+            <div>
+              <div class="schedule-item-title">Taller 1 — Herramientas para Alcanzar Esta Generación</div>
+              <div class="schedule-item-desc">Estrategias prácticas para conectar con la generación actual y transformar vidas.</div>
+            </div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-dot">🙏</div>
+            <div>
+              <div class="schedule-item-title">Momento de Aplicación</div>
+              <div class="schedule-item-desc">Grupos de trabajo, reflexión y preguntas al orador.</div>
+            </div>
+          </div>
+        </div>
+        <div class="schedule-footer">
+          <span class="schedule-location-icon">📍</span>
+          <div class="schedule-location-text">
+            <strong>Iglesia WAIO</strong>
+            Chilca, Perú
+          </div>
+        </div>
+      </div>
+
+      <!-- DÍA 2 -->
+      <div class="schedule-day">
+        <div class="schedule-day-header">
+          <div>
+            <div class="schedule-day-name">Sábado 20</div>
+            <div class="schedule-day-date">Junio 2025 · Sesión Matutina</div>
+          </div>
+          <div class="schedule-time-badge">10 AM</div>
+        </div>
+        <div class="schedule-body">
+          <div class="schedule-item">
+            <div class="schedule-dot">☀️</div>
+            <div>
+              <div class="schedule-item-title">Inicio y Devocional</div>
+              <div class="schedule-item-desc">Apertura matutina, alabanza y preparación espiritual para el taller.</div>
+            </div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-dot">🎨</div>
+            <div>
+              <div class="schedule-item-title">Taller 2 — Programas Creativos</div>
+              <div class="schedule-item-desc">Aprende a diseñar programas dinámicos e impactantes que transformen tu ministerio.</div>
+            </div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-dot">🎁</div>
+            <div>
+              <div class="schedule-item-title">Entrega de Regalo + Cierre</div>
+              <div class="schedule-item-desc">Recepción del libro PDF de John Maxwell y clausura del evento.</div>
+            </div>
+          </div>
+        </div>
+        <div class="schedule-footer">
+          <span class="schedule-location-icon">📍</span>
+          <div class="schedule-location-text">
+            <strong>Iglesia WAIO</strong>
+            Chilca, Perú
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SPEAKER -->
+<section class="speaker-section">
+  <div class="container">
+    <div class="section-label">Nuestro Orador</div>
+    <h2 class="section-title">Conócelo</h2>
+    <div class="speaker-inner fade-up">
+      <div class="speaker-img-wrap">
+        <div class="speaker-img-ring">
+          <img src="images/jhos-yactayo.jpg" alt="Jhos Yactayo">
+        </div>
+        <div class="speaker-badge">⭐ Orador Principal</div>
+      </div>
+      <div>
+        <div class="section-label" style="margin-bottom:0.5rem;">Pastoral Juvenil</div>
+        <h3 class="speaker-name">Jhos<br>Yactayo</h3>
+        <div class="speaker-role">Director General · Apoyo Juvenil LATAM</div>
+        <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin:0.85rem 0 1rem;">
+          <span style="background:rgba(0,180,255,0.12); color:var(--blue); border:1px solid rgba(0,180,255,0.25); border-radius:100px; font-size:0.7rem; font-weight:700; letter-spacing:0.05em; padding:0.3rem 0.85rem;">Teólogo</span>
+          <span style="background:rgba(255,214,0,0.12); color:var(--yellow); border:1px solid rgba(255,214,0,0.25); border-radius:100px; font-size:0.7rem; font-weight:700; letter-spacing:0.05em; padding:0.3rem 0.85rem;">Conferencista</span>
+          <span style="background:rgba(0,200,83,0.12); color:var(--green); border:1px solid rgba(0,200,83,0.25); border-radius:100px; font-size:0.7rem; font-weight:700; letter-spacing:0.05em; padding:0.3rem 0.85rem;">Coach en Liderazgo</span>
+          <span style="background:rgba(255,45,85,0.12); color:var(--red); border:1px solid rgba(255,45,85,0.25); border-radius:100px; font-size:0.7rem; font-weight:700; letter-spacing:0.05em; padding:0.3rem 0.85rem;">Gestor Empresarial</span>
+        </div>
+        <p style="color:var(--muted); font-size:0.88rem; line-height:1.8; max-width:460px; margin-bottom:1.25rem;">Director General de Apoyo Juvenil LATAM, Teólogo, Conferencista y Coach en Liderazgo Juvenil, Gestor Empresarial y <strong style="color:var(--text);">Representante de Cambia Tu Mundo de John Maxwell en Perú.</strong></p>
+        <div class="speaker-social">
+          <span>📱</span> <span>@jhos_antonio</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GIFT -->
+<section class="gift-section">
+  <div class="container">
+    <div class="section-label">Regalo Especial</div>
+    <h2 class="section-title">Sorpresa Para Ti</h2>
+    <div class="gift-card fade-up">
+      <div>
+        <div class="gift-label">🎁 Incluido en tu inscripción</div>
+        <h3 class="gift-title">Libro Digital de<br><em>John Maxwell</em></h3>
+        <p class="gift-desc">Todos los participantes recibirán como regalo un libro en PDF de John Maxwell — uno de los máximos referentes mundiales en liderazgo. Un recurso invaluable para tu crecimiento como líder.</p>
+      </div>
+      <div class="gift-book">
+        <div class="author">John C. Maxwell</div>
+        <div class="btitle">Liderazgo &amp; Crecimiento</div>
+        <div class="pdf-tag">PDF DIGITAL</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section">
+  <div class="container">
+    <div class="section-label">Momentos Anteriores</div>
+    <h2 class="section-title">Así Vivimos</h2>
+  </div>
+  <div class="gallery-strip">
+    <img src="images/taller-1.jpg" alt="Taller grupal">
+    <img src="images/taller-2.jpg" alt="Sesión de taller">
+    <img src="images/taller-3.jpg" alt="Participantes">
+    <img src="images/taller-4.jpg" alt="Trabajo en equipo">
+    <img src="images/taller-5.jpg" alt="Grupos de trabajo">
+    <img src="images/taller-6.jpg" alt="Actividades">
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="form-section" id="registro">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:1rem;">
+      <div class="section-label" style="justify-content:center;">¡Es Tu Momento!</div>
+      <h2 class="section-title">Regístrate Ahora</h2>
+      <p style="color:var(--muted); font-size:0.9rem; max-width:500px; margin:0 auto;">Completa el formulario y asegura tu lugar. Cupos limitados 🔥</p>
+    </div>
+    <div class="form-wrap">
+      <div class="form-card">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre(s)</label>
+            <input type="text" id="nombre" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <label>Apellidos</label>
+            <input type="text" id="apellidos" placeholder="Tus apellidos completos" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>WhatsApp</label>
+            <input type="tel" id="whatsapp" placeholder="+51 9XX XXX XXX" required>
+          </div>
+          <div class="form-group">
+            <label>Correo Electrónico</label>
+            <input type="email" id="email" placeholder="tu@correo.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Iglesia de Procedencia</label>
+          <input type="text" id="iglesia" placeholder="Nombre de tu iglesia">
+        </div>
+        <div class="form-group">
+          <label>Preguntas para el Orador</label>
+          <textarea id="preguntas" placeholder="¿Tienes alguna pregunta para Jhos Yactayo? Escríbela aquí..."></textarea>
+        </div>
+
+        <div style="background:rgba(255,214,0,0.08); border:1px solid rgba(255,214,0,0.2); border-radius:12px; padding:1rem 1.25rem; margin-bottom:1.25rem; display:flex; align-items:center; gap:0.75rem;">
+          <span style="font-size:1.5rem;">💰</span>
+          <div>
+            <div style="font-size:0.75rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; font-weight:600;">Inversión</div>
+            <div style="font-family:'Bebas Neue'; font-size:1.5rem; color:var(--yellow);">S/ 10.00 Nuevos Soles</div>
+          </div>
+        </div>
+
+        <button class="submit-btn" id="submit-btn" onclick="enviarRegistro()">
+          ¡Confirmar Mi Registro! 🚀
+        </button>
+
+        <div class="error-box" id="error-box"></div>
+        <div class="success-box" id="success-box">
+          <div class="check">🎉</div>
+          <h3>¡Registro Exitoso!</h3>
+          <p>Tu lugar está reservado. Muy pronto recibirás más información por WhatsApp y correo electrónico.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="images/logo.jpg" alt="Logo">
+  </div>
+  <div class="footer-text">
+    <strong>Liderando las Nuevas Generaciones</strong><br>
+    19 y 20 de Junio · Iglesia WAIO, Chilca – Perú<br><br>
+    Organizado por <strong>Apoyo Juvenil LATAM</strong>
+  </div>
+</footer>
+
+<script>
+// ── COUNTDOWN ──
+function updateCountdown() {
+  const eventDate = new Date('2025-06-19T08:00:00-05:00');
+  const now = new Date();
+  const diff = eventDate - now;
+  if (diff <= 0) {
+    document.getElementById('countdown').innerHTML = '<div style="color:var(--yellow);font-family:Bebas Neue;font-size:1.8rem;">¡El evento ya comenzó! 🔥</div>';
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ── INTERSECTION OBSERVER ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ── GOOGLE SHEETS SUBMIT ──
+// INSTRUCCIONES:
+// 1. Ve a Google Sheets y crea una hoja con columnas:
+//    Timestamp | Nombre | Apellidos | WhatsApp | Correo | Iglesia | Preguntas
+// 2. Ve a Extensiones > Apps Script y pega el script del archivo instrucciones.txt
+// 3. Despliega como Web App (acceso: cualquier persona)
+// 4. Copia la URL y pégala abajo en SCRIPT_URL
+
+const SCRIPT_URL = 'TU_URL_DE_APPS_SCRIPT_AQUI';
+
+async function enviarRegistro() {
+  const btn = document.getElementById('submit-btn');
+  const errorBox = document.getElementById('error-box');
+  const successBox = document.getElementById('success-box');
+
+  const nombre = document.getElementById('nombre').value.trim();
+  const apellidos = document.getElementById('apellidos').value.trim();
+  const whatsapp = document.getElementById('whatsapp').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const iglesia = document.getElementById('iglesia').value.trim();
+  const preguntas = document.getElementById('preguntas').value.trim();
+
+  errorBox.style.display = 'none';
+
+  if (!nombre || !apellidos || !whatsapp || !email) {
+    errorBox.textContent = '⚠️ Por favor completa todos los campos obligatorios.';
+    errorBox.style.display = 'block';
+    return;
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    errorBox.textContent = '⚠️ Por favor ingresa un correo electrónico válido.';
+    errorBox.style.display = 'block';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Enviando... ⏳';
+
+  const data = { nombre, apellidos, whatsapp, email, iglesia, preguntas };
+
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    btn.style.display = 'none';
+    successBox.style.display = 'block';
+
+    ['nombre','apellidos','whatsapp','email','iglesia','preguntas'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = '¡Confirmar Mi Registro! 🚀';
+    errorBox.textContent = '❌ Hubo un error al enviar. Inténtalo de nuevo.';
+    errorBox.style.display = 'block';
+  }
+}
+</script>
+</body>
+</html>
